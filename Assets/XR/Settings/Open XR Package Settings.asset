@@ -243,7 +243,7 @@ MonoBehaviour:
   Values:
   - {fileID: -338175974121554628}
   - {fileID: -2104023868892531481}
-  - {fileID: 6071571775201373435}
+  - {fileID: 3906697845855264944}
 --- !u!114 &608891230157831361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,21 +394,6 @@ MonoBehaviour:
   extensionStrings:
   - XR_KHR_binding_modification
   - XR_EXT_dpad_binding
---- !u!114 &6071571775201373435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5a1f07dc5afe854f9f12a4194aca3fb, type: 3}
-  m_Name: iPhone
-  m_EditorClassIdentifier: 
-  features: []
-  m_renderMode: 1
-  m_depthSubmissionMode: 0
 --- !u!114 &7932194785237496776
 MonoBehaviour:
   m_ObjectHideFlags: 0
