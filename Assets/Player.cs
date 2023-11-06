@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameTile currentTile;
-    public GameTile nextTile;
 
     public void UpdatePosition()
     {
