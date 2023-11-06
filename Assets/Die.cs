@@ -18,15 +18,15 @@ public class Die : MonoBehaviour
         return Random.Range(1, faces + 1);
     }
 
-    public void Roll()
+    public int Roll()
     {
         result = GetRandomNumber();
         animator.Play("Roll_" + result);
+        return result;
     }
 
     public void OnRollFinished()
     {
         Debug.Log("Walk player towards die result: " + result);
-        Debug.Log("Ends turn and give it to another player");
     }
 }
