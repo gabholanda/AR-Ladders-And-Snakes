@@ -8,6 +8,7 @@ public class GameBoard : MonoBehaviour
     public Die die;
     public List<GameTileWrapper> tiles;
     public int startPoint = 0;
+    public bool hasWon = false;
     private void Awake()
     {
         player.currentTile = tiles[startPoint].tile;
@@ -16,7 +17,7 @@ public class GameBoard : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !player.isMoving && !die.isRolling)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0) && !player.isMoving && !die.isRolling && !hasWon)
         {
             die.Roll();
         }
@@ -32,10 +33,22 @@ public class GameBoard : MonoBehaviour
                 startPoint = tiles[startPoint].connectedTilePosition;
                 player.futureTile = tiles[startPoint].tile;
                 player.UpdatePosition();
+                WinGame();
                 return;
             }
             player.futureTile = tiles[startPoint].tile;
             player.UpdatePosition();
+            WinGame();
+        }
+    }
+
+    void WinGame()
+    {
+     if (player.currentTile == tiles[99].tile || player.futureTile == tiles[99].tile)
+       {
+            Transform childToHide = transform.GetChild(0);
+            childToHide.gameObject.SetActive(true);
+            hasWon = true;
         }
     }
 }
