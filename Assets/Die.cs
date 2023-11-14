@@ -7,7 +7,11 @@ public class Die : MonoBehaviour
     private int faces;
     [SerializeField]
     private Animator animator;
-    private int result;
+    public int result;
+    public int cachedLastResult = 1;
+    public GameBoard board;
+
+    public bool isRolling = false;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -18,15 +22,22 @@ public class Die : MonoBehaviour
         return Random.Range(1, faces + 1);
     }
 
-    public int Roll()
+    public void Roll()
     {
+        isRolling = true;
+        transform.localRotation = Quaternion.Euler(-90, 0, 0);
         result = GetRandomNumber();
         animator.Play("Roll_" + result);
-        return result;
+        if (cachedLastResult == result)
+        {
+            OnRollFinished();
+        }
     }
 
     public void OnRollFinished()
     {
-        Debug.Log("Walk player towards die result: " + result);
+        isRolling = false;
+        cachedLastResult = result;
+        board.TriggerPlayerMovement();
     }
 }

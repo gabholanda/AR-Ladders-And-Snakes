@@ -11,27 +11,31 @@ public class GameBoard : MonoBehaviour
     private void Awake()
     {
         player.currentTile = tiles[startPoint].tile;
-        player.UpdatePosition();
+        player.transform.localPosition = player.currentTile.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !player.isMoving && !die.isRolling)
         {
-            int result = die.Roll();
-            startPoint = Mathf.Clamp(startPoint + result, 0, tiles.Count - 1);
-            if (tiles.Count - 1 >= startPoint)
+            die.Roll();
+        }
+    }
+
+    public void TriggerPlayerMovement()
+    {
+        startPoint = Mathf.Clamp(startPoint + die.result, 0, tiles.Count - 1);
+        if (tiles.Count - 1 >= startPoint)
+        {
+            if (tiles[startPoint].connectedTilePosition > 0)
             {
-                if (tiles[startPoint].connectedTilePosition > 0)
-                {
-                    startPoint = tiles[startPoint].connectedTilePosition;
-                    player.currentTile = tiles[startPoint].tile;
-                    player.UpdatePosition();
-                    return;
-                }
-                player.currentTile = tiles[startPoint].tile;
+                startPoint = tiles[startPoint].connectedTilePosition;
+                player.futureTile = tiles[startPoint].tile;
                 player.UpdatePosition();
+                return;
             }
+            player.futureTile = tiles[startPoint].tile;
+            player.UpdatePosition();
         }
     }
 }
